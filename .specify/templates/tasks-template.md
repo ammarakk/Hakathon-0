@@ -48,6 +48,12 @@ description: "Task list template for feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
+**Constitutional Constraints:**
+- [ ] Work ONLY in current /phase-X/ folder (per constitution)
+- [ ] Create Agent_Skills/*.md for all AI functionality
+- [ ] Secrets (.env, tokens) stay local-only (never synced)
+- [ ] External actions use MCP servers (draft → approve → execute)
+
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
 - [ ] T003 [P] Configure linting and formatting tools
@@ -59,6 +65,12 @@ description: "Task list template for feature implementation"
 **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
+
+**Constitutional Constraints:**
+- [ ] Implement Ralph Wiggum loop (Stop hook pattern) for multi-step tasks
+- [ ] Set up /Needs_Action/ file drop triggers for watchers
+- [ ] Configure /Pending_Approval/ workflow for sensitive actions
+- [ ] Ensure all vault R/W stays within folder structure
 
 Examples of foundational tasks (adjust based on your project):
 

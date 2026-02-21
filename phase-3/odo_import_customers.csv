@@ -1,0 +1,4 @@
+name,email,phone,street,city,zip,country_code
+ABC Corp,contact@abccorp.com,+1-555-0101,"123 Business St",New York,10001,US
+XYZ Ltd,info@xyzltd.com,+1-555-0102,"456 Commerce Ave",Los Angeles,90001,US
+Startup Co,hello@startupco.com,+1-555-0103,"789 Innovation Blvd",San Francisco,94101,US

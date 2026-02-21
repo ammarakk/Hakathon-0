@@ -1,0 +1,41 @@
+[Unit]
+Description=AI Employee Health Server
+Documentation=https://github.com/your-username/ai-employee
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/ai-employee
+Environment="PATH=/opt/ai-employee/venv/bin:/usr/local/bin:/usr/bin:/bin"
+EnvironmentFile=-/opt/ai-employee/cloud/config/cloud.env
+
+# Health server configuration
+Environment="HEALTH_PORT=8080"
+Environment="HEALTH_RATE_LIMIT=1"
+
+# Main command
+ExecStart=/opt/ai-employee/venv/bin/python phase-4/cloud/agent/health-server.py
+
+# Auto-restart configuration
+Restart=always
+RestartSec=10
+StartLimitInterval=60
+StartLimitBurst=3
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ai-employee-health
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Resource limits
+MemoryLimit=512M
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target

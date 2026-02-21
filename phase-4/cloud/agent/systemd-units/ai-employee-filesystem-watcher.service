@@ -1,0 +1,50 @@
+[Unit]
+Description=AI Employee Filesystem Watcher - Phase 4 Cloud Agent
+Documentation=https://github.com/your-username/ai-employee
+After=network.target ai-employee-orchestrator.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/ai-employee
+Environment="PATH=/opt/ai-employee/venv/bin:/usr/local/bin:/usr/bin:/bin"
+EnvironmentFile=-/opt/ai-employee/cloud/config/cloud.env
+
+# Watcher configuration
+Environment="WATCHER_INTERVAL=30"
+Environment="WATCHER_TYPE=filesystem"
+Environment="WATCH_PATH=/vault/Needs_Action"
+Environment="AGENT_ROLE=CLOUD"
+
+# Main command
+ExecStart=/opt/ai-employee/venv/bin/python -c "
+import time
+import sys
+sys.path.insert(0, '/opt/ai-employee')
+from cloud.agent.filesystem_watcher import FilesystemWatcher
+watcher = FilesystemWatcher(path='/vault/Needs_Action', interval=30)
+watcher.run()
+"
+
+# Auto-restart on failure
+Restart=on-failure
+RestartSec=30
+StartLimitInterval=300
+StartLimitBurst=3
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ai-employee-filesystem-watcher
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Resource limits
+MemoryLimit=512M
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target

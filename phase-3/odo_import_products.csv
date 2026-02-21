@@ -1,0 +1,4 @@
+name,default_code,list_price,detailed_type,description
+Consulting Services,CONS-001,100.00,service,"Professional consulting services"
+Software Development,DEV-001,150.00,service,"Custom software development"
+Technical Support,SUPP-001,75.00,service,"Ongoing technical support"

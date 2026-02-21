@@ -31,7 +31,15 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] Document Adherence: Deliverables match hackathon blueprint exactly (no scope creep)
+- [ ] Privacy & Security: All secrets (.env, tokens, sessions) excluded from synced files
+- [ ] Human-in-the-Loop: Sensitive actions (payments>$500, sends, posts) require approval workflow
+- [ ] MCP Pattern: External actions use connected MCP servers (draft → approve → execute)
+- [ ] Ralph Wiggum Loop: Multi-step tasks use Stop hook pattern for completion verification
+- [ ] Watcher-Triggered: Architecture uses file drops in /Needs_Action/ for triggers
+- [ ] Vault-Only R/W: Claude Code reads/writes only to Obsidian vault structure
+- [ ] Incremental Phases: Work stays in current /phase-X/ folder, doesn't modify previous phases
+- [ ] Agent Skills: All AI functionality implemented as vault Agent Skills, not scattered prompts
 
 ## Project Structure
 

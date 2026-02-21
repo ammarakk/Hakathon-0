@@ -1,0 +1,42 @@
+[Unit]
+Description=AI Employee Orchestrator - Phase 4 Cloud Agent
+Documentation=https://github.com/your-username/ai-employee
+After=network.target ai-employee-health.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/ai-employee
+Environment="PATH=/opt/ai-employee/venv/bin:/usr/local/bin:/usr/bin:/bin"
+EnvironmentFile=-/opt/ai-employee/cloud/config/cloud.env
+
+# Orchestrator configuration
+Environment="AGENT_ROLE=CLOUD"
+Environment="ALLOWED_ACTIONS=triage,draft,schedule"
+Environment="VAULT_PATH=/vault"
+
+# Main command (assuming orchestrator is a Python script)
+ExecStart=/opt/ai-employee/venv/bin/python cloud/agent/orchestrator.py --mode cloud
+
+# Auto-restart configuration
+Restart=always
+RestartSec=10
+StartLimitInterval=300
+StartLimitBurst=5
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ai-employee-orchestrator
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Resource limits (cloud has 24GB RAM, but we limit per service)
+MemoryLimit=2G
+CPUQuota=200%
+
+[Install]
+WantedBy=multi-user.target
